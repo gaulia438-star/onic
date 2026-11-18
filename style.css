@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Header & Navigasi */
+header {
+    background-color: #0a0a0a;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #ffc107;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffc107;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #ffffff;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ffc107;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 70px 20px;
+    background-image: linear-gradient(#ffe604b3, rgba(209, 212, 20, 0.7)), url('onic-bgt');
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid #bedb18;
+}
+
+.hero h1 {
+    font-size: 42px;
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: #ffc107;
+    color: #000000;
+    border: none;
+    padding: 10px 22px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+.chant-text {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffc107;
+    min-height: 28px;
+}
+
+/* Container Umum */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h2 {
+    color: #ffc107;
+    border-left: 5px solid #ffc107;
+    padding-left: 12px;
+    margin-bottom: 20px;
+}
+
+/* Card Profil */
+.card-profil {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.card-profil p {
+    margin-bottom: 8px;
+}
+
+/* Filter & Grid Roster */
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    background-color: #252525;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 8px 15px;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background-color: #ffc107;
+    color: #000000;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.player-card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-top: 4px solid #ffc107;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+.player-card {
+            cursor: pointer;
+            position: relative;
+        }
+        .klik-info {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Styling Modal Pop-up */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background-color: #1e1e1e;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: left;
+        }
+        .modal-content h3 { color: #ffc107; margin-bottom: 10px; font-size: 24px; }
+        .modal-content p { color: #ddd; font-size: 15px; margin-bottom: 20px; line-height: 1.7; }
+        .close-btn {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+        .close-btn:hover { background-color: #e0a800; }
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+}
+
+.player-card h3 {
+    color: #ffc107;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.player-card .role-badge {
+    display: inline-block;
+    background-color: #333;
+    color: #ffc107;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.player-card p {
+    font-size: 14px;
+    color: #bbbbbb;
+}
+
+/* List Prestasi */
+.list-prestasi {
+    list-style: none;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.list-prestasi li {
+    padding: 10px 0;
+    border-bottom: 1px solid #2c2c2c;
+}
+
+.list-prestasi li:last-child {
+    border-bottom: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0a0a0a;
+    color: #888888;
+    margin-top: 50px;
+    border-top: 1px solid #222;
+}
+/* Efek zoom saat kursor diarahkan ke foto */
+.player-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease; /* Kecepatan animasi */
+}
+
+.player-img-container img:hover {
+    transform: scale(1.25); /* Foto akan membesar 25% saat disentuh mouse */
+}

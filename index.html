@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONIC Esports ID - Fan Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #0a0a0a;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #ffc107;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffc107;
+            letter-spacing: 2px;
+        }
+        .logo span { color: #ffffff; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a { color: #ffffff; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: #ffc107; }
+        
+        .hero {
+            text-align: center;
+            padding: 70px 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2507 100%);
+            border-bottom: 1px solid #333;
+        }
+        .hero h1 { font-size: 42px; color: #ffc107; margin-bottom: 10px; }
+        .hero p { font-size: 18px; color: #cccccc; margin-bottom: 25px; }
+        
+        button {
+            background-color: #ffc107;
+            color: #000000;
+            border: none;
+            padding: 10px 22px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover { background-color: #e0a800; transform: scale(1.05); }
+        .chant-text { 
+            margin-top: 15px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            color: #ffc107; 
+            min-height: 28px; 
+            cursor: pointer;
+        }
+        
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        h2 { color: #ffc107; border-left: 5px solid #ffc107; padding-left: 12px; margin-bottom: 20px; }
+        
+        .card-profil { background-color: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+        .card-profil p { margin-bottom: 8px; }
+        
+        .filter-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .filter-btn { background-color: #252525; color: #ffffff; font-size: 14px; padding: 8px 15px; }
+        .filter-btn.active, .filter-btn:hover { background-color: #ffc107; color: #000000; }
+        
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .player-card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-top: 4px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .player-card:hover { transform: translateY(-5px); }
+        
+        /* Gaya untuk Foto Player */
+        .player-img-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 12px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #ffc107;
+            background-color: #2c2c2c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .player-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-card h3 { color: #ffc107; font-size: 22px; margin-bottom: 5px; }
+        .player-card .role-badge {
+            display: inline-block;
+            background-color: #333;
+            color: #ffc107;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+        .player-card p { font-size: 14px; color: #cccccc; margin-bottom: 6px; }
+        
+        .award-box {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed #444;
+            font-size: 13px;
+            color: #ffd54f;
+            text-align: left;
+        }
+
+        .list-prestasi { list-style: none; background-color: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+        .list-prestasi li { padding: 10px 0; border-bottom: 1px solid #2c2c2c; }
+        .list-prestasi li:last-child { border-bottom: none; }
+        
+        footer { text-align: center; padding: 20px; background-color: #0a0a0a; color: #888888; margin-top: 50px; border-top: 1px solid #222; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ONIC <span>ESPORTS</span></div>
+        <nav>
+            <ul>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#roster">Roster & Penghargaan</a></li>
+                <li><a href="#prestasi">Prestasi Tim</a></li>
+            </ul>
+        </nav>
+        <!-- Modal Pop-up untuk Memori Pemain -->
+    <div id="modal-memori" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-nama"></h3>
+            <p id="modal-teks"></p>
+            <button class="close-btn" onclick="tutupModal()">Tutup</button>
+        </div>
+    </div>
+    </header>
+
+
+    <section class="hero">
+        <h1>THE SKY KINGS</h1>
+        <p>Landak Kuning kebanggaan Indonesia di panggung Mobile Legends: Bang Bang.</p>
+        <button id="btn-chant">Klik untuk Chant!</button>
+        <p id="chant-output" class="chant-text"></p>
+    </section>
+
+    <section id="profil" class="container">
+        <h2>Profil Tim</h2>
+        <div class="card-profil">
+            <p><strong>Nama Tim:</strong> ONIC Esports</p>
+            <p><strong>Julukan:</strong> Landak Kuning / Raja Langit (Sky Kings)</p>
+            <p><strong>Didirikan:</strong> 26 Juli 2018</p>
+            <p><strong>Divisi Utama:</strong> Mobile Legends: Bang Bang (MPL ID)</p>
+        </div>
+    </section>
+
+    <section id="roster" class="container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-role="all">Semua</button>
+            <button class="filter-btn" data-role="Jungler">Jungler</button>
+            <button class="filter-btn" data-role="Mid Laner">Mid Laner</button>
+            <button class="filter-btn" data-role="Roamer">Roamer</button>
+            <button class="filter-btn" data-role="Gold Laner">Gold Laner</button>
+            <button class="filter-btn" data-role="EXP Laner">EXP Laner</button>
+        </div>
+        <div id="roster-grid" class="grid-container"></div>
+    </section>
+
+    <section id="prestasi" class="container">
+        <h2>Prestasi Utama Tim</h2>
+        <ul class="list-prestasi">
+            <li>🏆 Juara MPL Indonesia Season 3, 8, 10, 11, 12, 13 (4-Peat Champion)</li>
+            <li>🏆 Juara MSC (Mobile Legends Southeast Asia Cup) 2019 & 2023</li>
+            <li>🏆 Juara MPLI (ONE Esports MPL Invitational) 2021 & 2022</li>
+            <li>🥈 Runner-Up M5 World Championship 2023</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Dibuat oleh wahyu aulia (20251220049) - TI D25 | GO ONIC!</p>
+    </footer>
+
+    <script>
+        const listPemain = [
+            { 
+                nick: "Kairi", 
+                namaAsli: "Kairi Ygnacio Rayosdelsol", 
+                role: "Jungler", 
+                hero: "Lancelot, Ling, Hayabusa",
+                hadiah: "Final MVP MPL ID S10, Best Jungler MPL ID S11 & S12",
+                foto: "https://assets.promediateknologi.id/crop/0x0:0x0/1200x0/webp/photo/p3/75/2024/04/28/Snapinstaapp_440420643_18235994266268662_2931197528409837528_n_1080-2246907256.jpg" // Ganti dengan nama file foto Kairi kamu
+            },
+            { 
+                nick: "Sanz", 
+                namaAsli: "Gilang", 
+                role: "Mid Laner", 
+                hero: "Valentina, Yve, Pharsa",
+                hadiah: "Regular Season MVP MPL ID S11, Final MVP S11 & S13",
+                foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9LMg1A2_g4w0GEqVzepcDBeaVnKWUzQxptXqUBZlzDw&s=10" // Ganti dengan nama file foto Sanz kamu
+            },
+            { 
+                nick: "Kiboy", 
+                namaAsli: "Nicky Fernando Pontonuwu", 
+                role: "Roamer", 
+                hero: "Chou, Khufra, Kaja",
+                hadiah: "Final MVP MSC 2023, Final MVP MPL ID S12, Best Roamer",
+                foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuXpZfDlsgRPSvxg3OdZnziThvV4ThtbDTV122xnl66A&s=10" // Ganti dengan nama file foto Kiboy kamu
+            },
+            { 
+                nick: "Sasa", 
+                namaAsli: "Lu Khai Bean",
+                Asal:"Malaysia", 
+                Keterangan:"Mantan Pemain Onic",
+                role: "Gold Laner", 
+                hero: "Claude, Karrie, Granger",
+                hadiah: "Juara 1 Piala Presiden Esports 2019, Juara 1 Mobile Star League Season 3 (2019),Juara 1 MPL Indonesia Season 3 (2019),Juara 1 MSC 2019",
+                foto: "https://image.ggwp.id/post/20250306/sasa-kage-onic--640x360.jpg" // Ganti dengan nama file foto CW kamu
+            },
+            { 
+                nick: "CW", 
+                namaAsli: "Calvin Winata", 
+                role: "Gold Laner",
+                Keterangan:"Mantan Pemain", 
+                hero: "Beatrix, Claude, Wanwan",
+                hadiah: "Final MVP MPL ID S8, Best Gold Laner MPL ID S10 & S11",
+                foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLJ8uuU3TKgb09IyynOVCD6OHZPowUlNLhkTgeXI3cNQ&s=10" // Ganti dengan nama file foto CW kamu
+            },
+            { 
+                nick: "Zavero", 
+                namaAsli: "Clayton Adrielo Kuswanto", 
+                role: "Gold Laner", 
+                hero: "Beatrix, Harith, Claude",
+                hadiah: "Juara MPL ID Season 9, Juara MPL ID Season 16,Juara Liga Esports Nasional 2024,uara Games of the Future 2025",
+                foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTNSKRXJTe4szfKML8PpI51TjpTT1FdSrPw5wbhL8A1I9V3SARl-jMccZa&s=10" // Ganti dengan nama file foto CW kamu
+            },
+            { 
+                nick: "Skylar", 
+                namaAsli: "Schevenko David Tendean", 
+                keterngan:"Mantan Gold Laner ONIC, sebelumnya RRQ",
+                role: "Gold Laner", 
+                hero: "Natan, Claude, Beatrix",
+                hadiah: "Juara MPL ID Season 15, Juara MPL ID Season 16,Juara Liga Esports Nasional 2024,uara Games of the Future 2025",
+                foto: "https://malang.disway.id/upload/a88a7a2dcd1db1a58b2db9f777da9ae0.jpeg" 
+            },
+            { 
+                nick: "Kelra", 
+                namaAsli: "Grant Duane Pillas", 
+                keterngan:"Sekarang Masuk Tim Onic Id",
+                role: "Gold Laner", 
+                hero: "Beatrix, Claude, Harith, Bruno, Wanwan",
+                hadiah: "Juara MPL PH Season 14,Juara M6 World Championship,Juara MPL ID Season 17",
+                foto: "https://cdn.oneesports.gg/wp-content/uploads/sites/2/2024/11/462540701_440554535403991_6639521621430987468_n.jpg" // Ganti dengan nama file foto CW kamu
+            },
+            { 
+                nick: "Lutpiii", 
+                namaAsli: "Lutfi Ardianto", 
+                role: "EXP Laner", 
+                hero: "Arlott, Terizla, Paquito",
+                hadiah: "Most Improved Player MPL ID S13, Juara MPL ID S13",
+                foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ-fnGphPH7R7mHdl3Zri-SIPpn9Y1xJ0JbTeUKiTTCXRmiJWsZJMCd2US&s=10" // Ganti dengan nama file foto Lutpiii kamu
+            },
+            { 
+                nick: "Butsss", 
+                namaAsli: "Muhammad Satrya Sanubari", 
+                role: "EXP Laner", 
+                hero: "Yu Zhong, Esmeralda, Uranus",
+                hadiah: "Regular Season MVP MPL ID S8, Best EXP Laner S10 & S12",
+                foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5HPcDD2yjg3NCMBe8OgUuHL8phq1PRAoxsQBHrfxVKw&s=10"
+            },
+        ];
+
+        const grid = document.getElementById("roster-grid");
+
+        function renderPemain(filterRole) {
+            grid.innerHTML = "";
+            const hasil = filterRole === "all" 
+                ? listPemain 
+                : listPemain.filter(p => p.role === filterRole);
+
+            hasil.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "player-card";
+                card.innerHTML = `
+                    <div>
+                        <div class="player-img-container">
+                            <img src="${p.foto}" alt="${p.nick}" onerror="this.src='https://via.placeholder.com/100?text=ONIC'">
+                        </div>
+                        <h3>${p.nick}</h3>
+                        <span class="role-badge">${p.role}</span>
+                        <p><strong>Nama:</strong> ${p.namaAsli}</p>
+                        <p><strong>Hero:</strong> ${p.hero}</p>
+                    </div>
+                    <div class="award-box">
+                        <strong>🏅 Penghargaan:</strong><br>
+                        ${p.hadiah}
+                    </div>
+                `;
+                
+                // Efek tambahan: Kalau kartu playernya diklik, fotonya bisa nge-zoom/membesar sebentar
+                card.addEventListener("click", () => {
+                    const img = card.querySelector("img");
+                    img.style.transform = "scale(1.15)";
+                    img.style.transition = "0.3s";
+                    setTimeout(() => {
+                        img.style.transform = "scale(1)";
+                    }, 300);
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        renderPemain("all");
+
+        const tombolFilter = document.querySelectorAll(".filter-btn");
+        tombolFilter.forEach(btn => {
+            btn.addEventListener("click", () => {
+                tombolFilter.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                renderPemain(btn.getAttribute("data-role"));
+            });
+        });
+
+        const btnChant = document.getElementById("btn-chant");
+        const teksChant = document.getElementById("chant-output");
+        const listChant = [
+            "GO ONIC! GO ONIC! GO! 🔥",
+            "RAJA LANGIT TAK TERKALAHKAN! ⚡",
+            "LANDAK KUNING BERAKSI! 🦔💛",
+            "ONIC ID JUARA! 🏆"
+        ];
+        let idx = 0;
+
+        btnChant.addEventListener("click", () => {
+            teksChant.textContent = listChant[idx];
+            idx = (idx + 1) % listChant.length;
+            teksChant.style.transform = "scale(1.1)";
+            setTimeout(() => { teksChant.style.transform = "scale(1)"; }, 200);
+        });
+
+        teksChant.addEventListener("click", () => {
+            btnChant.click();
+        });
+    </script>
+</body>
+</html>
